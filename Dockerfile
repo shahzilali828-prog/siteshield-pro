@@ -13,11 +13,11 @@ COPY package*.json ./
 COPY prisma ./prisma/
 RUN npm ci
 
-# Generate Prisma Client for SQLite
-RUN npx prisma generate
-
 # Copy the rest of the application
 COPY . .
+
+# Generate Prisma Client for SQLite
+RUN npx prisma generate
 
 # Build the Next.js application
 RUN npm run build
