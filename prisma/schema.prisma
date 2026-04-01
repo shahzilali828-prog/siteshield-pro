@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model ScanHistory {
+  id        String   @id @default(cuid())
+  url       String
+  grade     String
+  output    String
+  scannedAt DateTime @default(now())
+}
