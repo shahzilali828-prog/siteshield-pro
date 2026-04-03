@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { exec } from 'child_process';
 import util from 'util';
 import path from 'path';
-import { prisma } from '../../../lib/prisma';
+import { getPrisma } from '../../../lib/prisma';
 
 const execPromise = util.promisify(exec);
 
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     const grade = gradeMatch ? gradeMatch[1] : 'Unknown';
 
     try {
-      await prisma.scanHistory.create({
+      await getPrisma().scanHistory.create({
         data: { url: requestedUrl, grade, output: cleanOutput }
       });
     } catch (dbErr) {
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
       if (requestedUrl) {
         try {
-          await prisma.scanHistory.create({
+          await getPrisma().scanHistory.create({
             data: { url: requestedUrl, grade, output: clean }
           });
         } catch (e) { }
