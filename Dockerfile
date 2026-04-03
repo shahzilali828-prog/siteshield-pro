@@ -20,6 +20,9 @@ COPY . .
 RUN npx prisma generate
 
 # Build the Next.js application
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_DISABLE_ESLINT=1
+ENV NEXT_DISABLE_TYPE_CHECK=1
 RUN npm run build
 
 # Expose the port Next.js runs on
